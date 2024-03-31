@@ -1,27 +1,26 @@
 import { Page , Locator, expect} from "@playwright/test"
 import { allure } from "allure-playwright";
 import { Input } from "./input";
-export class BaseElement {
+export abstract class BaseElement {
   WebElement:Locator;
   Locator:string;
-  constructor(page: Page,locator:string){
+  NameElement:string;
+  constructor(page: Page,locator:string, name:string){
     this.WebElement = page.locator(locator)
     this.Locator = locator;
+    this.NameElement = name;
   }
   async click(){
-    await allure.step(`Click ${this.Locator}`, async ()=>{
+    await allure.step(`Click ${this.Locator}. Name WebElement=${this.NameElement}`, 
+    async ()=>{
       await this.WebElement.click();
     })
   }
   
   async checkText(textExpected:string|RegExp){
-    await allure.step(`Check text: ${textExpected} in ${this.Locator} `, async ()=>{
+    await allure.step(`Check text: ${textExpected} in ${this.Locator}. Element: ${this.NameElement}`, async ()=>{
       await expect(this.WebElement).toHaveText(textExpected);
     });
   }
-  async dataInput( inputData: string):Promise<void>{
-    await allure.step(`Input data: ${this.WebElement}  in element: ${this.WebElement}`, async()=>{
-      await this.WebElement.fill(inputData)
-    })
-  }
+  
 }
