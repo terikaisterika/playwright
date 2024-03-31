@@ -1,5 +1,4 @@
 import { test, expect} from '@playwright/test';
-import { allure } from "allure-playwright";
 import { YaHomePage } from '../pages/yan/ya-home-page';
 import { YaSearchPage } from '../pages/yan/ya-search-page';
 import { AHomePage } from '../pages/automationteststore/a-home-page';
@@ -14,14 +13,12 @@ test('Проверка поиска на automationteststore.com', async({page,c
   await aHomePage.searchButton.click();
   const aSearchPage = new ASearchPage(page);
   await aSearchPage.rightContainer.checkText(/Absolute/)
-  context.cookies().then((cookies)=>cookies.forEach((cookie)=>console.log('Terika: ',cookie)))
   const cookies = await context.cookies();
   const installedCookie = await cookies.filter((cookie)=>cookie.name == expectedCookie.name);
   expect(installedCookie.length).toBe(1);
   expect(installedCookie[0].value).toBe(expectedCookie.value)
 }),
-test('Проверка поиска на ya.ru', async({page, context})=>{
-  
+test('Проверка поиска на ya.ru', async({page, context})=>{ 
   const expectedCookie= `test`;
   const yaHomePage = new YaHomePage(page);
   await yaHomePage.visit('https://www.ya.ru');
