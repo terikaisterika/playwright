@@ -3,4 +3,6 @@ export class Button extends BaseElement {
   get typeOf(): string {
     return 'button';
   }
+
+  
 }

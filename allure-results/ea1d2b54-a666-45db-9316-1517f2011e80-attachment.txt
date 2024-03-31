@@ -1,0 +1,40 @@
+Terika:  {
+  name: 'test',
+  value: 'Terika',
+  domain: 'automationteststore.com',
+  path: '/',
+  expires: -1,
+  httpOnly: false,
+  secure: false,
+  sameSite: 'Lax'
+}
+Terika:  {
+  name: 'AC_SF_8CEFDA09D5',
+  value: '98d6ee4283510a110e057d57c06fd35a',
+  domain: 'automationteststore.com',
+  path: '/',
+  expires: -1,
+  httpOnly: true,
+  secure: true,
+  sameSite: 'Lax'
+}
+Terika:  {
+  name: 'language',
+  value: 'en',
+  domain: 'automationteststore.com',
+  path: '/',
+  expires: 1714486567.564742,
+  httpOnly: false,
+  secure: true,
+  sameSite: 'Lax'
+}
+Terika:  {
+  name: 'currency',
+  value: 'USD',
+  domain: 'automationteststore.com',
+  path: '/',
+  expires: 1714486567.564953,
+  httpOnly: false,
+  secure: true,
+  sameSite: 'Lax'
+}

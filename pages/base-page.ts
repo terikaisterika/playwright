@@ -8,6 +8,8 @@ export class BasePage{
   async visit(url: string):Promise<void>{
     await allure.step(`Go to ${url}`, async()=>{
       await this.page.goto(url)
+      
     })
   }
+  async addCookies(context){}
 }
