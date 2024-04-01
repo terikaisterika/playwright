@@ -2,10 +2,10 @@ import { Page , Locator, expect} from "@playwright/test"
 import { allure } from "allure-playwright";
 import { Input } from "./input";
 export abstract class BaseElement {
-  WebElement:Locator;
+  public WebElement:Locator;
   Locator:string;
   NameElement:string;
-  constructor(page: Page,locator:string, name:string){
+  constructor(page: Page|Locator,locator:string, name:string){
     this.WebElement = page.locator(locator)
     this.Locator = locator;
     this.NameElement = name;
@@ -17,10 +17,16 @@ export abstract class BaseElement {
     })
   }
   
-  async checkText(textExpected:string|RegExp){
+  async checkText(textExpected:string|RegExp|null){ 
     await allure.step(`Check text: ${textExpected} in ${this.Locator}. Element: ${this.NameElement}`, async ()=>{
+      if(textExpected === null) throw new Error('Текст для сравнения равен null')
       await expect(this.WebElement).toHaveText(textExpected);
-    });
+    })
   }
   
+  // async getInnerElement(page:Page, locator:string){
+  //   await allure.step(`Get inner element from `, async ()=>{
+  //     this.WebElement.locator(locator);
+  //   });
+  // }
 }
