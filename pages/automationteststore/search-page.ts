@@ -1,7 +1,7 @@
 import {BasePage} from '../base-page'
 import {BlockLowercaseElements} from '../../elements/block-lowercase-elements'
 import { Page } from '@playwright/test';
-export class ASearchPage extends BasePage{
+export class SearchPage extends BasePage{
   public readonly rightContainer: BlockLowercaseElements;
   constructor(public page: Page) {
     super(page);

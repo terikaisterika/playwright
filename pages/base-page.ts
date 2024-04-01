@@ -1,4 +1,4 @@
-import {test, Page} from '@playwright/test';
+import {test, Page, expect} from '@playwright/test';
 import { allure } from 'allure-playwright';
 export class BasePage{
   
@@ -11,5 +11,10 @@ export class BasePage{
       
     })
   }
-  async addCookies(context){}
+  async currentUrlIs(partUrl:string |RegExp){
+    await allure.step(`The url must contain ${partUrl}. Current url: ${this.page.url}`, async()=>{
+      await expect(this.page).toHaveURL(partUrl);
+      
+    })
+  }
 }
