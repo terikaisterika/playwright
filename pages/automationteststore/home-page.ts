@@ -25,9 +25,7 @@ export class HomePage extends BasePage{
   public nameProductCard: Locator;
   constructor(protected page: Page) {
     super(page)
-    
-    
-    
+    this.getProductCardData(page);
     this.goToCartLink = new Link(page, '//header//ul[contains(@class, "topcart") and contains(@class, "pull-left")]', 'goToCartLink')
     
   }

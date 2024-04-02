@@ -8,6 +8,6 @@ export class HeaderPage extends BasePage{
   constructor(protected page: Page){
     super(page);
     this.searchInput = new Input( page, 'input#filter_keyword', 'searchInput');
-    this.searchButton = new Button(page, 'div[title="Go"]', 'searchButton')
+    this.searchButton = new Button(page, 'div[title="Go"] i', 'searchButton')
   }
 }
