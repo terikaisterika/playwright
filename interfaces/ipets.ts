@@ -1,4 +1,4 @@
-type statusPets = 'available'| 'pending'| 'sold',
+type statusPets = 'available'| 'pending'| 'sold';
 
 export interface IPetsRequestBody {
   id: number;
