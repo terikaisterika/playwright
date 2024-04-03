@@ -1,10 +1,12 @@
 import {test, expect} from "@playwright/test"
 import { allure } from "allure-playwright"
+import { IPetsRequestBody } from "../interfaces/ipets"
+
 const baseUrl = 'https://petstore.swagger.io/v2'
 
 test('create pet', async ({request})=>{
   
-    const data = {
+    const data:IPetsRequestBody = {
       id: 0,
       category:{
         id: 1,
