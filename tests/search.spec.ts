@@ -2,7 +2,8 @@ import { test, expect} from '@playwright/test';
 import { HomePage } from '../pages/automationteststore/home-page';
 import {SearchPage} from '../pages/automationteststore/search-page'
 import { HeaderPage } from '../pages/automationteststore/header-page';
-test('Проверка поиска на automationteststore.com', async({page,context})=>{
+
+test('Проверка поиска по полному слову', async({page,context})=>{
   const header = new HeaderPage(page);
   await header.visit('/')
   
