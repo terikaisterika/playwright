@@ -1,24 +1,12 @@
 import {test, expect} from "@playwright/test"
 import { allure } from "allure-playwright"
+import { IPetsRequestBody } from "../interfaces/ipets"
+import { DataPet } from "../data-for-api/pets"
 const baseUrl = 'https://petstore.swagger.io/v2'
 
 test('create pet', async ({request})=>{
-  
-    const data = {
-      id: 0,
-      category:{
-        id: 1,
-        name: 'dogs'
-      },
-      name: 'Bobbi',
-      photoUrls:["/testdog.jpg"],
-      tags: [{
-        id: 1,
-        name: "spaniel"
-    }],
-    status: "available"
-  }
-  const newIssue = await request.post(`${baseUrl}/pet`, {
+    const data:IPetsRequestBody = DataPet.dataForCreatePet
+    const newIssue = await request.post(`${baseUrl}/pet`, {
     headers: {'Accept': 'application/json'},
     data: data
   })
