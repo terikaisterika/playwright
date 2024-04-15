@@ -30,9 +30,10 @@ export class HomePage extends BasePage{
     
   }
 
-  async getProductCardData(page){
+  async getProductCardData(page:Page){
     this.productСard = new BlockLowercaseElements(page, '//*[@id="featured"]//div[contains(@class, "thumbnails")]/div[1]', 'productCardDiv');
     this.addToCartLink = this.productСard.WebElement.locator('//a[@data-id]');
     this.nameProductCard = this.productСard.WebElement.locator('//a[@class="prdocutname"]')
+    
   }
 }
