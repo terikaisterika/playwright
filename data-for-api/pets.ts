@@ -1,9 +1,14 @@
-import { IPetsRequestBody } from "../interfaces/ipets";
+import { IPetsRequest } from "../interfaces/ipets";
 
 export class DataPet{
-  static dataForCreatePet: IPetsRequestBody = {
-    id: 0,
-    category:{
+  
+  static dataForCreatePet: IPetsRequest = {
+    headers: {
+      'Accept': 'application/json'
+    },
+    data: {
+      id: 1,
+      category:{
       id: 1,
       name: 'dogs'
     },
@@ -14,5 +19,7 @@ export class DataPet{
       name: "spaniel"
   }],
   status: "available"
+    }
 }
+  
 }
