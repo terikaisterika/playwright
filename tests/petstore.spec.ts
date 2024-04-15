@@ -1,9 +1,9 @@
-import {test, expect} from "@playwright/test"
+import {test, expect, APIResponse} from "@playwright/test"
 import { allure } from "allure-playwright"
 import { IPetsRequest, IPetsResponse } from "../interfaces/ipets"
 import { DataPet } from "../data-for-api/pets"
-import { Response, Request, APIResponse} from "@playwright/test"
-test.describe('Проверка post запроса на /pet', async()=>{
+import { EndpointPet as pointPet } from "../data-for-api/endpoints/endpoint-pet"
+test.describe(`Проверка post запроса на ${pointPet.endpoint}`, async()=>{
   const baseUrl = 'https://petstore.swagger.io/v2'
   let petId: number;
   let response:APIResponse;
@@ -12,16 +12,13 @@ test.describe('Проверка post запроса на /pet', async()=>{
 
   test.beforeAll('Получение данных response create pet', async ({request})=>{
     requestData = DataPet.dataForCreatePet
-    response = await request.post(`${baseUrl}/pet`, {
+    response = await request.post(`${baseUrl}${pointPet.endpoint}`, {
       headers: requestData.headers,
       data: requestData.data 
     })
     expect(response.ok(), `status в диапазоне 200-299 ответов`).toBeTruthy();
     reqJson = await response.json();
-    petId = reqJson.id;
-    // allure.step('status в диапазоне 200-299 ответов', async()=>{
-    //   expect(response.ok()).toBeTruthy();
-    // })  
+    petId = reqJson.id; 
   })
   test('Проверка заголовков ответа access-control-allow-origin', async()=>{
     allure.step(`Заголовок access-control-allow-origin равен *`, async()=>{

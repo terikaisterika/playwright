@@ -1,4 +1,4 @@
-type statusPets = 'available'| 'pending'| 'sold';
+export type statusPets = 'available'| 'pending'| 'sold';
 
 export interface IPetsRequest {
   headers: {
