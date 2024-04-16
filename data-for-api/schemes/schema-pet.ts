@@ -1,6 +1,6 @@
 import Ajv, { JSONSchemaType } from "ajv"
 import { IPetsResponse } from "../../interfaces/ipets"
-export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(`{
+export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(JSON.stringify({
   "type": "object",
   "properties": {
     "id": {
@@ -66,6 +66,6 @@ export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(`{
     "tags",
     "status"
   ]
-}`)
+}))
 const ajv = new Ajv();
 export const validatePetSchema = ajv.compile(responsePetSchema)
