@@ -44,7 +44,7 @@ test.describe(`Проверка post запроса на ${pointPet.endpoint}`, 
       expect(reqJson.status).toBe(requestData.data.status)
     })
   })
-  test.only('Проверка schema', async ()=>{
+  test('Проверка schema', async ()=>{
     allure.step('Схема ответа соответствует ожидаемой', async()=>{
       const conditionSchema = validatePetSchema(reqJson)
       expect(conditionSchema, `Json ответа ${JSON.stringify(reqJson)}`).toBeTruthy();
