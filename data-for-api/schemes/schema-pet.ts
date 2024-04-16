@@ -30,7 +30,8 @@ export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(`{
         {
           "type": "string"
         }
-      ]
+      ],
+      minItems: 1
     },
     "tags": {
       "type": "array",
@@ -50,7 +51,8 @@ export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(`{
             "name"
           ]
         }
-      ]
+      ],
+      minItems: 1
     },
     "status": {
       "type": "string"
