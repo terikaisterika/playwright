@@ -3,6 +3,8 @@ import { allure } from "allure-playwright"
 import { IPetsRequest, IPetsResponse } from "../interfaces/ipets"
 import { DataPet } from "../data-for-api/pets"
 import { EndpointPet as pointPet } from "../data-for-api/endpoints/endpoint-pet"
+import { validatePetSchema } from "../data-for-api/schemes/schema-pet"
+import  Ajv, {JSONSchemaType } from "ajv"
 test.describe(`Проверка post запроса на ${pointPet.endpoint}`, async()=>{
   const baseUrl = 'https://petstore.swagger.io/v2'
   let petId: number;
@@ -40,6 +42,12 @@ test.describe(`Проверка post запроса на ${pointPet.endpoint}`, 
   test('Проверка созданных данных ', async()=>{
     allure.step('Статус отправленных данных и ответа совпадают', async()=>{
       expect(reqJson.status).toBe(requestData.data.status)
+    })
+  })
+  test.only('Проверка schema', async ()=>{
+    allure.step('Схема ответа соответствует ожидаемой', async()=>{
+      const conditionSchema = validatePetSchema(reqJson)
+      expect(conditionSchema, `Json ответа ${JSON.stringify(reqJson)}`).toBeTruthy();
     })
   })
 })
