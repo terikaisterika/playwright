@@ -31,6 +31,7 @@ export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(JSON.
           "type": "string"
         }
       ],
+      maxItems: 5,
       minItems: 1
     },
     "tags": {
@@ -52,6 +53,7 @@ export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(JSON.
           ]
         }
       ],
+      maxItems: 10,
       minItems: 1
     },
     "status": {
@@ -67,5 +69,5 @@ export const responsePetSchema: JSONSchemaType<IPetsResponse> = JSON.parse(JSON.
     "status"
   ]
 }))
-const ajv = new Ajv();
+const ajv = new Ajv({strictTuples:false});
 export const validatePetSchema = ajv.compile(responsePetSchema)

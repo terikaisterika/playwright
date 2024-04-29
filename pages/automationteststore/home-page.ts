@@ -15,23 +15,18 @@ export class HomePage extends BasePage{
    */
   public addToCartLink: Locator;
   /**
-   * Ссылка перехода в корзину
-   */
-  public goToCartLink: Link;
-  /**
    * Наименование продукта с типом локатор
    * Нужен для кейсов, чтобы сравнивать, что товар добавленный из списка есть в корзине
    */
   public nameProductCard: Locator;
   constructor(protected page: Page) {
     super(page)
-    this.getProductCardData(page);
-    this.goToCartLink = new Link(page, '//header//ul[contains(@class, "topcart") and contains(@class, "pull-left")]', 'goToCartLink')
+    this.getProductCardData();
     
   }
 
-  async getProductCardData(page:Page){
-    this.productСard = new BlockLowercaseElements(page, '//*[@id="featured"]//div[contains(@class, "thumbnails")]/div[1]', 'productCardDiv');
+  async getProductCardData(){
+    this.productСard = new BlockLowercaseElements(this.page, '//*[@id="featured"]//div[contains(@class, "thumbnails")]/div[1]', 'productCardDiv');
     this.addToCartLink = this.productСard.WebElement.locator('//a[@data-id]');
     this.nameProductCard = this.productСard.WebElement.locator('//a[@class="prdocutname"]')
     

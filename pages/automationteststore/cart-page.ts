@@ -14,7 +14,7 @@ export class CartPage extends BasePage{
   /**
    * Ссылка с наименованием товара в корзине
    */
-  public productNameLink: Link;
+  public productNameLink: Locator;
   /**
    * Общая цена в
    */
@@ -42,20 +42,21 @@ export class CartPage extends BasePage{
     this.totalPriceTable = new BlockLowercaseElements(page, '//table[@id="totals_table"]', 'totalPriceTable')
     
     this.getProductPriceData();
+
   }
   /**
    * @param nameProduct наименование продукта товара, добавленного 
    * в корзину на предыдущем шаге. 
    */
-  async productCartTr(page, nameProduct:string|null){
+  async productCartTr(nameProduct:string|null){
     
-    await allure.step(`Get tr With product by ${nameProduct}`, async()=>{
-      this.productInCartTr = new BlockLowercaseElements( page, `//form[@id="cart"]//a[contains(text(), "${nameProduct}")]/ancestor::tr`, 'searchInput');
+    await allure.step(`Получаем веб элемент tr. В локаторе используем название продукта ${nameProduct}. Название берется из товара, добавленного на предыдущем шаге`, async()=>{
+      this.productInCartTr = new BlockLowercaseElements( this.page, `//form[@id="cart"]//a[contains(text(), "${nameProduct}")]/ancestor::tr`, 'searchInput');
     })
-    await allure.step(`Get name in product card ${nameProduct}`, async()=>{
-      this.productNameLink =new Link(this.productInCartTr.WebElement, `//a[contains(text(), "${nameProduct}")]`, 'productNameLink')
+    await allure.step(`Получаем название продукта уже в корзине ${nameProduct}`, async()=>{
+      this.productNameLink  = this.productInCartTr.WebElement.locator(`//a[contains(text(), "${nameProduct}")]`)
     })
-    await allure.step(`Get price in product card ${nameProduct}`, async()=>{
+    await allure.step(`Получаем стоимость товара в корзине ${nameProduct}`, async()=>{
       this.totalPriceProduct = this.productInCartTr.WebElement.locator(`//td[6]`)
     })
   }
