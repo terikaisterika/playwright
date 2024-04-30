@@ -1,13 +1,15 @@
 import { allure } from 'allure-playwright'
 import { test, expect} from '../utils/pages'
-import { tagsAllure } from '../interfaces/for-allure'
+import { featuresAllureUI, tagsAllure } from '../interfaces/for-allure'
 test.describe(`Проверка поиска`, async()=>{
+  
   const wordForSearch = 'Absolute'
   test.beforeEach(async({header})=>{
+    await allure.feature(<featuresAllureUI>'UI поиск');
+    await allure.tag(<tagsAllure>"search")
     await header.visit('/')
   })
-  test('Проверка поиска по полному слову', async({header, productPage})=>{
-    allure.tag(<tagsAllure>"search")
+  test('Проверка поиска по полному слову', {tag: '@поиск'},async({header, productPage})=>{
     await header.searchInput.dataInput(wordForSearch)
     await header.searchButton.click();
     await productPage.currentUrlIs(new RegExp('product/product&product_id'))
@@ -15,8 +17,7 @@ test.describe(`Проверка поиска`, async()=>{
   })
   test(`Проверка поиска по части слова. Проверки: 
   переход на страницу /search. 
-  Есть товар, содержащий часть слова`, async ({header, searchPage})=>{
-    allure.tag(<tagsAllure>"search")
+  Есть товар, содержащий часть слова`, {tag: '@поиск'},async ({header, searchPage})=>{
     const partWord = wordForSearch.substring(0, 3);
     await header.searchInput.dataInput(partWord)
     await header.searchButton.click()

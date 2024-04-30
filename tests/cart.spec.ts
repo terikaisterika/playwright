@@ -2,11 +2,13 @@ import { allure } from "allure-playwright";
 import {test, expect } from "../utils/pages"
 import { WorkWithText } from "../elements/helpers/workWithText";
 import { WorkWithErrors } from "../elements/helpers/workWithErrors";
-import { tagsAllure } from "../interfaces/for-allure";
-test.describe('Work with cart', async ()=>{
+import { tagsAllure, featuresAllureUI } from "../interfaces/for-allure";
+test.describe('Work with cart', {tag: '@корзина'},async ()=>{
+  
   let expectedNameProduct:string|null;
   test.beforeEach(async({header, homePage})=>{
-    allure.tag(<tagsAllure>"cart")
+    await allure.feature(<featuresAllureUI>'UI корзина');
+    await allure.tag(<tagsAllure>"cart")
     await homePage.visit('/');
     expectedNameProduct = await homePage.nameProductCard.textContent();
     await WorkWithErrors.checkForNull(expectedNameProduct, 'expectedNameProduct');
@@ -14,7 +16,6 @@ test.describe('Work with cart', async ()=>{
     await header.goToCartLink.click();
   })
   test('Cверка наименования в корзине', async ({cartPage})=>{
-    allure.tag(<tagsAllure>"cart")
     await cartPage.currentUrlIs(new RegExp('checkout/cart'))
     await cartPage.productCartTr(expectedNameProduct);
     await allure.step(`В productNameLink должен быть текст ${expectedNameProduct}`, async ()=>{
@@ -24,7 +25,6 @@ test.describe('Work with cart', async ()=>{
     
   })
   test('Cверка стоимости в строке товара и в результате', async ({cartPage})=>{
-    allure.tag(<tagsAllure>"cart")
     await cartPage.currentUrlIs(new RegExp('checkout/cart'))
     await cartPage.productCartTr(expectedNameProduct);
     const totalPriceProductInTr= WorkWithText.getPriceFloat(await cartPage.totalPriceProduct.textContent());
