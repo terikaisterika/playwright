@@ -6,7 +6,8 @@ export const tagsAllure:IDataAllure = {
   cart: "cart",
   api: "api",
   favourites: "favourites",
-  personalAccount: "personal account"
+  personalAccount: "personal account",
+  smoke: "smoke"
 }
 
 export const featuresAllureUI:IDataAllure = {
@@ -14,6 +15,10 @@ export const featuresAllureUI:IDataAllure = {
   uiSearch: 'UI поиск'
 }
 
-export const featuresAllureAPI = {
+export const featuresAllureAPI:IDataAllure = {
   requestCreatePet: "Запрос create pet"
 };
+export const suiteAllure:IDataAllure = {
+  ui: "UI",
+  api: "API"
+}

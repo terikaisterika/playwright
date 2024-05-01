@@ -2,11 +2,12 @@ import { allure } from "allure-playwright";
 import {test, expect } from "../utils/pages"
 import { WorkWithText } from "../elements/helpers/workWithText";
 import { WorkWithErrors } from "../elements/helpers/workWithErrors";
-import { tagsAllure, featuresAllureUI } from "../interfaces/for-allure";
-test.describe('Work with cart', {tag: '@корзина'},async ()=>{
+import { tagsAllure, featuresAllureUI, suiteAllure } from "../interfaces/for-allure";
+test.describe('Работа с корзиной', {tag:[`@${tagsAllure.cart}`,`@${tagsAllure.smoke}`]},async ()=>{
   
   let expectedNameProduct:string|null;
   test.beforeEach(async({header, homePage})=>{
+    await allure.suite(suiteAllure.ui);
     await allure.feature(featuresAllureUI.uiCart);
     await allure.tag(tagsAllure.cart)
     await homePage.visit('/');
