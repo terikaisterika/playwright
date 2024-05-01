@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import { testPlanFilter } from "allure-playwright/dist/testplan";
+import * as os from "os";
 import { on } from 'events';
 /**
  * Read environment variables from file.
@@ -22,13 +23,20 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   grep: testPlanFilter(),
-  reporter: [['html'],['allure-playwright']],
+  reporter: [['html'],['allure-playwright',{
+    detail:true,
+    suiteTitle:false,
+    environmentInfo:{
+      os_platform: os.platform(),
+      node_version: process.version
+    }
+  }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://automationteststore.com',
     headless: true,
-    // screenshot: 'on',
+    screenshot: 'on',
     // video: 'on',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry'

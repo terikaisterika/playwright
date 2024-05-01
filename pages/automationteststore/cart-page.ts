@@ -37,6 +37,10 @@ export class CartPage extends BasePage{
    * Общая стоимость в таблице
    */
   public totalPriceInTable: Locator;
+  /**
+   * Кнопка удаления товара из корзины. Кликаем на a (link)
+   */
+  public deleteButtonInCartTr: Locator;
   constructor(public page: Page) {
     super(page);
     this.totalPriceTable = new BlockLowercaseElements(page, '//table[@id="totals_table"]', 'totalPriceTable')
@@ -59,14 +63,25 @@ export class CartPage extends BasePage{
     await allure.step(`Получаем стоимость товара в корзине ${nameProduct}`, async()=>{
       this.totalPriceProduct = this.productInCartTr.WebElement.locator(`//td[6]`)
     })
+    await allure.step(`Получаем кнопку удалить в строке товара ${nameProduct}`, async()=>{
+      this.deleteButtonInCartTr = this.productInCartTr.WebElement.locator(`//td[7]/a`)
+    })
   }
   /**
-   * Получить результирующие данные из блока цены
+   * Получить результирующие данные из блока расчетов стоимости
    */
   async getProductPriceData(){
-    this.subTotalPriceInTable = this.totalPriceTable.WebElement.locator('//tr[1]/td[2]');
-    this.flatShippingRateInTable = this.totalPriceTable.WebElement.locator('//tr[2]/td[2]');
-    this.totalPriceInTable = this.totalPriceTable.WebElement.locator('//tr[3]/td[2]')
+    await allure.step(`Получаем веб элемент subTotalPriceInTable. Это td элемент`, async()=>{
+      this.subTotalPriceInTable = this.totalPriceTable.WebElement.locator('//tr[1]/td[2]');
+    })
+    await allure.step(`Получаем веб элемент flatShippingRateInTable. Это td элемент`, async()=>{
+      this.flatShippingRateInTable = this.totalPriceTable.WebElement.locator('//tr[2]/td[2]');
+    })
+    await allure.step(`Получаем веб элемент totalPriceInTable. Это td элемент`, async()=>{
+      this.totalPriceInTable = this.totalPriceTable.WebElement.locator('//tr[3]/td[2]')
+    })
+    
+    
   }
   
   
