@@ -5,8 +5,8 @@ test.describe(`Проверка поиска`, async()=>{
   
   const wordForSearch = 'Absolute'
   test.beforeEach(async({header})=>{
-    await allure.feature(<featuresAllureUI>'UI поиск');
-    await allure.tag(<tagsAllure>"search")
+    await allure.feature(featuresAllureUI.uiSearch);
+    await allure.tag(tagsAllure.search)
     await header.visit('/')
   })
   test('Проверка поиска по полному слову', {tag: '@поиск'},async({header, productPage})=>{
