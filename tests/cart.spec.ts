@@ -7,8 +7,8 @@ test.describe('Work with cart', {tag: '@корзина'},async ()=>{
   
   let expectedNameProduct:string|null;
   test.beforeEach(async({header, homePage})=>{
-    await allure.feature(<featuresAllureUI>'UI корзина');
-    await allure.tag(<tagsAllure>"cart")
+    await allure.feature(featuresAllureUI.uiCart);
+    await allure.tag(tagsAllure.cart)
     await homePage.visit('/');
     expectedNameProduct = await homePage.nameProductCard.textContent();
     await WorkWithErrors.checkForNull(expectedNameProduct, 'expectedNameProduct');
