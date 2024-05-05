@@ -1,7 +1,7 @@
-import {test, expect, APIResponse} from "@playwright/test"
+import {APIResponse} from "@playwright/test"
+import {test, expect} from '../../utils/pet-fixture'
 import { allure } from "allure-playwright"
 import { IPetsRequest, IPetsResponse } from "../../interfaces/ipets"
-import { DataPet } from "../../data-for-api/pets"
 import { EndpointPet as pointPet } from "../../data-for-api/endpoints/endpoint-pet"
 import { validatePetSchema } from "../../data-for-api/schemes/schema-pet"
 import { tagsAllure, featuresAllureAPI, suiteAllure } from "../../interfaces/for-allure"
@@ -13,16 +13,14 @@ test.describe(`Проверка post запроса на ${pointPet.endpoint}`,{
   let reqJson:IPetsResponse;
   let requestData:IPetsRequest;
 
-  test.beforeAll('Получение данных response create pet', async ({request})=>{
-    
-    
+  test.beforeAll('Получение данных response create pet', async ({request, pet})=>{
     await allure.tag(tagsAllure.api)
-    requestData = DataPet.dataForCreatePet
+    requestData = pet.dataForCreatePet
     response = await request.post(`${baseUrl}${pointPet.endpoint}`, {
       headers: requestData.headers,
       data: requestData.data 
     })
-    expect(response.ok(), `status в диапазоне 200-299 ответов`).toBeTruthy();
+    expect(response.ok(), 'status в диапазоне 200-299 ответов').toBeTruthy();
     reqJson = await response.json();
     petId = reqJson.id; 
   })
@@ -64,4 +62,5 @@ test.describe(`Проверка post запроса на ${pointPet.endpoint}`,{
       expect(conditionSchema, `Json ответа ${JSON.stringify(reqJson)}`).toBeTruthy();
     })
   })
+  
 })
