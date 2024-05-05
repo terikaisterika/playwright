@@ -47,7 +47,7 @@ export class Assistant {
   static async skipOneTypeProject(nameProject:string, secondСondition:string=''){
     const addInformation =secondСondition ===''?secondСondition:`Причина: ${secondСondition}`
     if (nameProject!=='chromium'){
-      await allure.logStep(`Данный тест только для тестов с ${nameProject}. ${addInformation}`)
+      await allure.logStep(`Данный тест только для тестов на project chromium. ${addInformation}`)
         test.skip()
     }
 }
