@@ -1,3 +1,5 @@
+import {allure} from "allure-playwright"
+import { WorkerInfo } from "@playwright/test";
 interface IDataAllure {
   [key:string]:string;
 }
@@ -7,7 +9,8 @@ export const tagsAllure:IDataAllure = {
   api: "api",
   favourites: "favourites",
   personalAccount: "personal account",
-  smoke: "smoke"
+  smoke: "smoke",
+  adaptive: "adaptive"
 }
 
 export const featuresAllureUI:IDataAllure = {
@@ -20,5 +23,6 @@ export const featuresAllureAPI:IDataAllure = {
 };
 export const suiteAllure:IDataAllure = {
   ui: "UI",
-  api: "API"
+  api: "API",
+  adaptive: "ADAPTIVE"
 }

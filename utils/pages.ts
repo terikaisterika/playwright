@@ -1,9 +1,10 @@
-import {test as base } from '@playwright/test';
+import {test as base, BrowserContext} from '@playwright/test';
 import { HeaderPage } from '../pages/automationteststore/header-page';
 import { ProductPage } from '../pages/automationteststore/product-page';
 import { HomePage } from '../pages/automationteststore/home-page';
 import { CartPage } from '../pages/automationteststore/cart-page';
 import { SearchPage } from '../pages/automationteststore/search-page';
+import { allure } from 'allure-playwright';
 
 type adaptiveBreakpointsType = {
   [key:string]:{
@@ -11,7 +12,12 @@ type adaptiveBreakpointsType = {
     description:string
   }
 }
-const adaptiveBreakpoints: adaptiveBreakpointsType= {
+/**
+ * Для сравнений Breakpoints ширины.
+ * Появление и пропадание некоторых элементов будет зависеть от ширины экрана.
+ * Точки нужны для сравнений с context['_options'].viewport - шириной экрана в тесте
+ */
+export const adaptiveBreakpoints= {
   xSmall: {
     value: 576,
     description: 'xSmall < 576px'
@@ -29,14 +35,8 @@ const adaptiveBreakpoints: adaptiveBreakpointsType= {
     description: 'large >= 992px'
   }
 }
-// type adaptability = {
-//   adaptiveBreakpoints: adaptiveBreakpointsType
-// }
-// export const test = base.extend<adaptability>({
-  // adaptiveBreakpoints: async ({}, use)=>{
-  //   await use(adaptiveBreakpoints);
-  // }
-// })
+export type adaptiveBreakpointsOption = keyof typeof adaptiveBreakpoints;
+
 
 type pages = {
   header: HeaderPage;
