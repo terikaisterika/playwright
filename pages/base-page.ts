@@ -5,7 +5,7 @@ export class BasePage  {
   constructor(protected page: Page){
 
   }
-  async visit(url: string):Promise<void>{
+  async visit(url: string='/'):Promise<void>{
     await allure.step(`Переход на страницу ${url}`, async()=>{
       await this.page.goto(url, {waitUntil: 'domcontentloaded'})
       

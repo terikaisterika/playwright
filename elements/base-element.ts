@@ -26,13 +26,24 @@ export abstract class BaseElement {
    * Клик на текущем элементе
    * @param [forceValue=false] нужно ли игнорировать то, 
    * что кнопка не кликабельна.
-   * forceValue=true подойдет, если надо проверить, что в режиме конструктора 
-   * даже после нажатий на кнопки, расчетов нет.
    */
   async click(forceValue:boolean=false){
     await allure.step(`Клик на элемент с локатором: ${this.Locator}. Имя элемента: ${this.NameElement}`, 
     async ()=>{
       await this.WebElement.click({force: forceValue});
+    })
+  }
+  /**
+   * Тап на текущем элементе
+   * @param [forceValue=false] нужно ли игнорировать то, 
+   * что кнопка не кликабельна.
+   * tap исполльзовать, когда в playwright.comfig.ts в проекте указано isMobile:true, 
+   * либо это предполагается передавать в контексте 
+   */
+  async tap(forceValue:boolean=false){
+    await allure.step(`Тап на элемент с локатором: ${this.Locator}. Имя элемента: ${this.NameElement}`, 
+    async ()=>{
+      await this.WebElement.tap({force: forceValue});
     })
   }
   /**

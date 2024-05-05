@@ -5,6 +5,7 @@ import { IPetsRequest, IPetsResponse } from "../../interfaces/ipets"
 import { EndpointPet as pointPet } from "../../data-for-api/endpoints/endpoint-pet"
 import { validatePetSchema } from "../../data-for-api/schemes/schema-pet"
 import { tagsAllure, featuresAllureAPI, suiteAllure } from "../../interfaces/for-allure"
+import { Assistant } from "../../utils/assistant"
 test.describe(`Проверка post запроса на ${pointPet.endpoint}`,{tag: `@${tagsAllure.api}`}, async()=>{
   
   const baseUrl = 'https://petstore.swagger.io/v2'
@@ -13,8 +14,10 @@ test.describe(`Проверка post запроса на ${pointPet.endpoint}`,{
   let reqJson:IPetsResponse;
   let requestData:IPetsRequest;
 
-  test.beforeAll('Получение данных response create pet', async ({request, pet})=>{
+  test.beforeAll('Получение данных response create pet', async ({request, pet,}, workerInfo)=>{
+    await allure.parameter('device', workerInfo.project.name)
     await allure.tag(tagsAllure.api)
+    await Assistant.skipOneTypeProject(workerInfo.project.name, `Проверка ${tagsAllure.api}`) 
     requestData = pet.dataForCreatePet
     response = await request.post(`${baseUrl}${pointPet.endpoint}`, {
       headers: requestData.headers,

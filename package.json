@@ -6,6 +6,7 @@
   "scripts": {
     "debug": "npx playwright test --debug",
     "test": "npx playwright test",
+    "test_ui": "npx playwright test --grep-invert @api",
     "report": "npx allure serve allure-results"
   },
   "author": "",

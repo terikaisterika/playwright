@@ -2,5 +2,9 @@
   {
     "name": "Successful tests",
     "matchedStatuses": ["passed"]
+  },
+  {
+    "name": "Skipped tests",
+    "matchedStatuses": ["skipped"]
   }
 ]
